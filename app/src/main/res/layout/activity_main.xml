@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/open_add_kanji"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#932121"
+        android:text="Add a kanji"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/open_library"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#932121"
+        android:text="Library"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/open_package"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#932121"
+        android:text="Package"
+        android:textAllCaps="false"/>
+</LinearLayout>
