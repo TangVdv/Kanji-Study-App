@@ -8,11 +8,9 @@
 
     <Button
         android:id="@+id/createPackage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Create"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="16dp"
         android:backgroundTint="#932121"
         tools:ignore="MissingConstraints" />
 
@@ -23,6 +21,5 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="65dp">
-    </LinearLayout>
+        tools:layout_editor_absoluteY="65dp"/>
 </android.support.constraint.ConstraintLayout>

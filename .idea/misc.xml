@@ -9,9 +9,12 @@
         <entry key="..\:/Users/tangr/AndroidStudioProjects/DatabaseConnection/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/tangr/AndroidStudioProjects/DatabaseConnection/app/src/main/res/layout/activity_package_library.xml" value="0.33" />
         <entry key="..\:/Users/tangr/AndroidStudioProjects/DatabaseConnection/app/src/main/res/layout/test.xml" value="0.5" />
+        <entry key="..\:/Users/tangr/AndroidStudioProjects/Kanji-Study-App/app/src/main/res/layout/activity_kanji_library.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tangr/AndroidStudioProjects/Kanji-Study-App/app/src/main/res/layout/activity_package_library.xml" value="0.264" />
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

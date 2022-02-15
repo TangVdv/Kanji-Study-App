@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -37,12 +38,9 @@ public class PackageLibrary extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         AlertDialog.Builder builder = new AlertDialog.Builder(PackageLibrary.this);
 
                         builder.setTitle("Write a name");
-
-                        builder.setCancelable(false);
 
                         builder.setView(inputDialog);
 
@@ -52,8 +50,8 @@ public class PackageLibrary extends AppCompatActivity {
                                 data[0] = inputDialog.getText().toString();
                                 data[1] = null;
                                 myDb.insertData(column, data, "Package");
+                                ((ViewGroup) inputDialog.getParent()).removeView(inputDialog);
                                 inputDialog.getText().clear();
-                                viewAll();
                                 dialogInterface.dismiss();
                             }
                         });
@@ -62,6 +60,10 @@ public class PackageLibrary extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
+                                ((ViewGroup) inputDialog.getParent()).removeView(inputDialog);
+                                inputDialog.getText().clear();
+                                viewAll();
+
                             }
                         });
 
@@ -76,6 +78,7 @@ public class PackageLibrary extends AppCompatActivity {
     public void viewAll() {
         layoutPackage = (LinearLayout) findViewById(R.id.layoutPackage);
         layoutPackage.removeAllViews();
+        showMessage("PLZZZZZZZZ", String.valueOf(layoutPackage.getChildCount()));
 
         while(resultQuery.moveToNext()){
             myButton = new Button(this);
@@ -92,6 +95,14 @@ public class PackageLibrary extends AppCompatActivity {
             layoutPackage.addView(myButton);
         }
         resultQuery.moveToPosition(-1);
+    }
+
+    public void showMessage(String title, String Message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(Message);
+        builder.show();
     }
 
 }
