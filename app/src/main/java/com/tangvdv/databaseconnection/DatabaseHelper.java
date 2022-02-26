@@ -15,9 +15,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table if not exists Kanji(idKanji INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR(255), translation VARCHAR(255), banner VARCHAR(255), note TEXT, jlpt INTEGER, difficulty INTEGER)");
-        db.execSQL("create table if not exists Package(idPackage INTEGER PRIMARY KEY AUTOINCREMENT,name VARCHAR(255), numberKanji INTEGER)");
-        db.execSQL("create table if not exists Package_has_Kanji(Package_id INTEGER NOT NULL, Kanji_id INTEGER NOT NULL, PRIMARY KEY(Package_id, Kanji_id), FOREIGN KEY(Package_id) REFERENCES Package(idPackage), FOREIGN KEY(Kanji_id) REFERENCES Kanji(idKanji))");
+        db.execSQL("create table if not exists Kanji(" +
+                "idKanji INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "name VARCHAR(255), " +
+                "translation VARCHAR(255), " +
+                "banner VARCHAR(255), " +
+                "note TEXT, jlpt INTEGER, " +
+                "difficulty INTEGER)");
+
+        db.execSQL("create table if not exists Package(" +
+                "idPackage INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "name VARCHAR(255), " +
+                "numberKanji INTEGER)");
+
+        db.execSQL("create table if not exists Package_has_Kanji(" +
+                "Package_id INTEGER NOT NULL, " +
+                "Kanji_id INTEGER NOT NULL, " +
+                "PRIMARY KEY(Package_id, Kanji_id), " +
+                "FOREIGN KEY(Package_id) REFERENCES Package(idPackage), " +
+                "FOREIGN KEY(Kanji_id) REFERENCES Kanji(idKanji))");
     }
 
     @Override
@@ -26,6 +42,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Package");
         db.execSQL("DROP TABLE IF EXISTS Group_has_Kanji");
         onCreate(db);
+    }
+
+    public Cursor getSpecificPackage(Integer id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select name, numberKanji from Package WHERE idPackage = "+id,null);
+        return res;
     }
 
 
@@ -37,7 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getSpecificData(Integer id, String TABLE_NAME) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select name, translation from "+TABLE_NAME+ " WHERE idKanji = "+id,null);
+        Cursor res = db.rawQuery("select * from "+TABLE_NAME+ " WHERE idKanji = "+id,null);
         return res;
     }
 

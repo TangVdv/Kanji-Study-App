@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
+
+import java.util.Arrays;
 
 public class PackageLibrary extends AppCompatActivity {
     DatabaseHelper myDb;
@@ -50,9 +53,10 @@ public class PackageLibrary extends AppCompatActivity {
                                 data[0] = inputDialog.getText().toString();
                                 data[1] = null;
                                 myDb.insertData(column, data, "Package");
-                                ((ViewGroup) inputDialog.getParent()).removeView(inputDialog);
-                                inputDialog.getText().clear();
-                                dialogInterface.dismiss();
+                                Intent intent = new Intent(PackageLibrary.this, PackageShow.class);
+                                intent.putExtra("name", data[0]);
+                                startActivity(intent);
+                                finish();
                             }
                         });
 
@@ -62,7 +66,6 @@ public class PackageLibrary extends AppCompatActivity {
                                 dialogInterface.dismiss();
                                 ((ViewGroup) inputDialog.getParent()).removeView(inputDialog);
                                 inputDialog.getText().clear();
-                                viewAll();
 
                             }
                         });
@@ -74,11 +77,9 @@ public class PackageLibrary extends AppCompatActivity {
         viewAll();
     }
 
-
     public void viewAll() {
         layoutPackage = (LinearLayout) findViewById(R.id.layoutPackage);
         layoutPackage.removeAllViews();
-        showMessage("PLZZZZZZZZ", String.valueOf(layoutPackage.getChildCount()));
 
         while(resultQuery.moveToNext()){
             myButton = new Button(this);
@@ -87,22 +88,15 @@ public class PackageLibrary extends AppCompatActivity {
             myButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(PackageLibrary.this, null);
-                    intent.putExtra("id",v.getId());
+                    Button b = (Button)v;
+                    Intent intent = new Intent(PackageLibrary.this, PackageShow.class);
+                    intent.putExtra("name", b.getText() );
                     startActivity(intent);
                 }
             });
             layoutPackage.addView(myButton);
         }
         resultQuery.moveToPosition(-1);
-    }
-
-    public void showMessage(String title, String Message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(Message);
-        builder.show();
     }
 
 }
