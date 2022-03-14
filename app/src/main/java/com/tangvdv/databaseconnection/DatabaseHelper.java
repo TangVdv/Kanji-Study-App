@@ -50,6 +50,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public void deleteSpecificPackage(Integer id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM Package WHERE idPackage = "+id);
+    }
+
+    public void deleteKanjiFromPackage(Integer idPackage, Integer idKanji){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM Package_has_Kanji WHERE Package_id = "+idPackage+" AND Kanji_id = "+idKanji);
+    }
+
+    public Cursor getKanjiFromPackage(Integer id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select idKanji, name, translation from Kanji INNER JOIN Package_has_Kanji WHERE Package_has_Kanji.Package_id = "+id+" AND Kanji_id = idKanji" ,null);
+        return res;
+    }
+
 
     public Cursor getAllData(String TABLE_NAME) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -60,6 +76,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getSpecificData(Integer id, String TABLE_NAME) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from "+TABLE_NAME+ " WHERE idKanji = "+id,null);
+        return res;
+    }
+
+    public Cursor getSpecificDataByName(String name, String TABLE_NAME) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+TABLE_NAME+ " WHERE name = '"+name+"'",null);
         return res;
     }
 

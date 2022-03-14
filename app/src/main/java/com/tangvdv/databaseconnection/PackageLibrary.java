@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
@@ -17,7 +18,6 @@ import java.util.Arrays;
 
 public class PackageLibrary extends AppCompatActivity {
     DatabaseHelper myDb;
-    LinearLayout layoutPackage;
     Cursor resultQuery;
     Button myButton;
     Button createButton;
@@ -53,8 +53,9 @@ public class PackageLibrary extends AppCompatActivity {
                                 data[0] = inputDialog.getText().toString();
                                 data[1] = null;
                                 myDb.insertData(column, data, "Package");
+                                resultQuery = myDb.getSpecificDataByName(data[0], "Package");
                                 Intent intent = new Intent(PackageLibrary.this, PackageShow.class);
-                                intent.putExtra("name", data[0]);
+                                intent.putExtra("id", resultQuery.getInt(0));
                                 startActivity(intent);
                                 finish();
                             }
@@ -78,23 +79,56 @@ public class PackageLibrary extends AppCompatActivity {
     }
 
     public void viewAll() {
-        layoutPackage = (LinearLayout) findViewById(R.id.layoutPackage);
-        layoutPackage.removeAllViews();
+        LinearLayout layoutPackageList = (LinearLayout) findViewById(R.id.layoutPackage);
+        layoutPackageList.removeAllViews();
 
         while(resultQuery.moveToNext()){
+            LinearLayout container = new LinearLayout(this);
+            container.setId(resultQuery.getInt(0));
+            container.setOrientation(LinearLayout.HORIZONTAL);
+            LinearLayout.LayoutParams containerParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    150, 1f);
+            container.setLayoutParams(containerParams);
+
             myButton = new Button(this);
+            LinearLayout.LayoutParams myButtonParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT, 1f);
+            myButton.setLayoutParams(myButtonParams);
             myButton.setText(resultQuery.getString(1));
             myButton.setId(Integer.parseInt(resultQuery.getString(0)));
             myButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Button b = (Button)v;
                     Intent intent = new Intent(PackageLibrary.this, PackageShow.class);
-                    intent.putExtra("name", b.getText() );
+                    intent.putExtra("id", v.getId() );
                     startActivity(intent);
                 }
             });
-            layoutPackage.addView(myButton);
+
+            ImageButton deleteButton = new ImageButton(this);
+            LinearLayout.LayoutParams deleteButtonParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT, 0f);
+            deleteButton.setLayoutParams(deleteButtonParams);
+            deleteButton.setImageResource(R.drawable.trashcan);
+            deleteButton.setAdjustViewBounds(true);
+
+
+            deleteButton.setId(resultQuery.getInt(0));
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LinearLayout btnLayout = (LinearLayout) findViewById(v.getId());
+                    myDb.deleteSpecificPackage(v.getId());
+                    layoutPackageList.removeView(btnLayout);
+                }
+            });
+
+            container.addView(myButton);
+            container.addView(deleteButton);
+            layoutPackageList.addView(container);
         }
         resultQuery.moveToPosition(-1);
     }
