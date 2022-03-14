@@ -41,6 +41,7 @@ public class PackageShow extends AppCompatActivity {
 
 
         kanjiList();
+        setListAdapter();
 
         Button btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -144,8 +145,6 @@ public class PackageShow extends AppCompatActivity {
             container.addView(deleteButton);
             layoutKanjiList.addView(container);
         }
-
-        setListAdapter();
     }
 
     public void showMessage(String title, String message){

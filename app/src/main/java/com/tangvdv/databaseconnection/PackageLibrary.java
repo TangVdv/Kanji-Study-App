@@ -12,9 +12,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
-import android.widget.Toast;
-
-import java.util.Arrays;
 
 public class PackageLibrary extends AppCompatActivity {
     DatabaseHelper myDb;
@@ -22,11 +19,12 @@ public class PackageLibrary extends AppCompatActivity {
     Button myButton;
     Button createButton;
     EditText inputDialog;
-    String[] column = {"name", "numberKanji"};;
+    String[] column = {"name", "numberKanji"};
     String[] data = new String[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("print");
         myDb = new DatabaseHelper(this);
 
         super.onCreate(savedInstanceState);
@@ -47,13 +45,15 @@ public class PackageLibrary extends AppCompatActivity {
 
                         builder.setView(inputDialog);
 
+                        builder.setCancelable(false);
+
                         builder.setPositiveButton("Create", new DialogInterface.OnClickListener(){
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                data[0] = inputDialog.getText().toString();
-                                data[1] = null;
-                                myDb.insertData(column, data, "Package");
-                                resultQuery = myDb.getSpecificDataByName(data[0], "Package");
+                                myDb.insertData(new String[]{"name"}, new String[]{inputDialog.getText().toString()}, "Package");
+
+                                resultQuery = myDb.getLastInsertRowId();
+                                resultQuery.moveToFirst();
                                 Intent intent = new Intent(PackageLibrary.this, PackageShow.class);
                                 intent.putExtra("id", resultQuery.getInt(0));
                                 startActivity(intent);

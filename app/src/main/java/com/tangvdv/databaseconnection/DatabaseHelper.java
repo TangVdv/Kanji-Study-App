@@ -26,7 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table if not exists Package(" +
                 "idPackage INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "name VARCHAR(255), " +
-                "numberKanji INTEGER)");
+                "numberKanji INTEGER DEFAULT 0)");
 
         db.execSQL("create table if not exists Package_has_Kanji(" +
                 "Package_id INTEGER NOT NULL, " +
@@ -82,6 +82,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getSpecificDataByName(String name, String TABLE_NAME) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from "+TABLE_NAME+ " WHERE name = '"+name+"'",null);
+        return res;
+    }
+
+    public Cursor getLastInsertRowId(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select last_insert_rowid()", null);
         return res;
     }
 
