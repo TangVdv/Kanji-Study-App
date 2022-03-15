@@ -78,7 +78,6 @@ public class KanjiLibrary extends AppCompatActivity {
 
         resultQuery = myDb.getAllData("Kanji");
         if(resultQuery.getCount() == 0) {
-            showMessage("Error","Nothing found in the database");
             finish();
             return;
         }
