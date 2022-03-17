@@ -54,7 +54,7 @@ public class PackageLibrary extends AppCompatActivity {
 
                                 resultQuery = myDb.getLastInsertRowId();
                                 resultQuery.moveToFirst();
-                                Intent intent = new Intent(PackageLibrary.this, PackageShow.class);
+                                Intent intent = new Intent(PackageLibrary.this, ReviewOption.class);
                                 intent.putExtra("id", resultQuery.getInt(0));
                                 startActivity(intent);
                                 finish();
@@ -101,7 +101,7 @@ public class PackageLibrary extends AppCompatActivity {
             myButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(PackageLibrary.this, PackageShow.class);
+                    Intent intent = new Intent(PackageLibrary.this, ReviewOption.class);
                     intent.putExtra("id", v.getId() );
                     startActivity(intent);
                 }
