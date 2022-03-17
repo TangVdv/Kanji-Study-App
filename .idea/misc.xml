@@ -8,14 +8,14 @@
         <entry key="..\:/Users/tangr/AndroidStudioProjects/DatabaseConnection/app/src/main/res/layout/activity_kanji_show.xml" value="0.33" />
         <entry key="..\:/Users/tangr/AndroidStudioProjects/DatabaseConnection/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/tangr/AndroidStudioProjects/DatabaseConnection/app/src/main/res/layout/activity_package_library.xml" value="0.33" />
+        <entry key="..\:/Users/tangr/AndroidStudioProjects/DatabaseConnection/app/src/main/res/layout/activity_review.xml" value="0.2833333333333333" />
+        <entry key="..\:/Users/tangr/AndroidStudioProjects/DatabaseConnection/app/src/main/res/layout/activity_review_option.xml" value="0.2833333333333333" />
         <entry key="..\:/Users/tangr/AndroidStudioProjects/DatabaseConnection/app/src/main/res/layout/test.xml" value="0.5" />
-        <entry key="..\:/Users/tangr/AndroidStudioProjects/Kanji-Study-App/app/src/main/res/layout/activity_add_kanji.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tangr/AndroidStudioProjects/Kanji-Study-App/app/src/main/res/layout/activity_kanji_library.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tangr/AndroidStudioProjects/Kanji-Study-App/app/src/main/res/layout/activity_kanji_show.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/tangr/AndroidStudioProjects/Kanji-Study-App/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/tangr/AndroidStudioProjects/Kanji-Study-App/app/src/main/res/layout/activity_package_library.xml" value="0.264" />
-        <entry key="..\:/Users/tangr/AndroidStudioProjects/Kanji-Study-App/app/src/main/res/layout/activity_package_show.xml" value="0.25" />
-        <entry key="..\:/Users/tangr/AndroidStudioProjects/Kanji-Study-App/app/src/main/res/layout/activity_review.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/tangr/AndroidStudioProjects/Kanji-Study-App/app/src/main/res/layout/activity_package_show.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

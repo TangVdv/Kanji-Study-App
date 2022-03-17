@@ -7,11 +7,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 
 public class ReviewOption extends AppCompatActivity {
     Button btnStart;
     Spinner spinnerKanjiLimit;
+    String kanjiLimit;
+    CheckBox option1, option2, option3, option4;
+    Integer options = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,15 @@ public class ReviewOption extends AppCompatActivity {
 
         btnStart = (Button) findViewById(R.id.btnStart);
 
+        option1 = findViewById(R.id.option1);
+        option2 = findViewById(R.id.option2);
+        option3 = findViewById(R.id.option3);
+        option4 = findViewById(R.id.option4);
+
+
+        setKanjiLimit();
+        startReview();
+
 
     }
 
@@ -35,7 +48,7 @@ public class ReviewOption extends AppCompatActivity {
         spinnerKanjiLimit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                // TODO: get value from dropdown
+                kanjiLimit = adapterView.getItemAtPosition(i).toString();
             }
 
             @Override
@@ -50,7 +63,19 @@ public class ReviewOption extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        startActivity(new Intent(ReviewOption.this, AddKanji.class));
+                        if(option1.isChecked())
+                            options++; // you can save this as checked somewhere
+                        if(option2.isChecked())
+                            options++; // you can save this as checked somewhere
+                        if(option3.isChecked())
+                            options++; // you can save this as checked somewhere
+                        if(option4.isChecked())
+                            options++; // you can save this as checked somewhere
+
+                        Intent intent = new Intent(new Intent(ReviewOption.this, Review.class));
+                        intent.putExtra("limit", kanjiLimit);
+                        intent.putExtra("option", options);
+                        startActivity(intent);
                     }
                 }
         );
